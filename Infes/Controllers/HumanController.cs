@@ -12,15 +12,13 @@ namespace Infes.Controllers
     {
         private IHumanRepository _humanRepository { get; }
         private IManRepository _manRepository { get; }
-        public HumanController(IHumanRepository humanRepository)
+        private ICountryRepository _countryRepository { get; }
+        public HumanController(IHumanRepository humanRepository, IManRepository manRepository, ICountryRepository countryRepository)
         {
             _humanRepository = humanRepository;
-        }
-        public HumanController(IManRepository manRepository)
-        {
             _manRepository = manRepository;
+            _countryRepository = countryRepository;
         }
-        [Route("human/{id}")]
         public ActionResult Index(int id)
         {
             ViewData["Humans"] = id == 0 ? _manRepository.GetAllHumans() : _manRepository.GetHuman(id);
@@ -41,6 +39,13 @@ namespace Infes.Controllers
             {
                 return BadRequest(e);
             }
+            return View();
+        }
+        [Route("human/{humanId}")]
+        public IActionResult District(int humanId)
+        {
+            var districtId = _manRepository.GetHuman(humanId).Where(c => c.Id == humanId).Select(c => c.DistrictId).FirstOrDefault();
+            ViewData["District"] = _countryRepository.GetDistrict(districtId).FirstOrDefault();
             return View();
         }
     }

@@ -32,6 +32,8 @@ namespace Infes
             services.AddScoped<IHumanRepository, HumanRepository>();
 
             services.AddScoped<IManRepository, ManRepository>();
+
+            services.AddScoped<ICountryRepository, CountryRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

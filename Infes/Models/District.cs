@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Infes.Models
 {
-    public class Country
+    public class District
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -14,8 +14,9 @@ namespace Infes.Models
         public int DeadCount { get; set; }
         public int RecoveredCount { get; set; }
         public bool Vaccine { get; set; }
+        public int CountryId { get; set; }
 
         public virtual List<Human> Humans { get; set; }
-        public virtual List<Human> Districts { get; set; }
+        public virtual Country Country { get; set; }
     }
 }

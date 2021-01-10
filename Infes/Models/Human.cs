@@ -16,5 +16,8 @@ namespace Infes.Models
 
         public int CountryId { get; set; }
         public virtual Country Country { get; set; }
+
+        public int DistrictId { get; set; }
+        public virtual District District { get; set; }
     }
 }
